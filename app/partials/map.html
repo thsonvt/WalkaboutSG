@@ -1,52 +1,65 @@
-<!-- 	<div class="google-map" 
-		center="centerProperty"
-		zoom="zoomProperty" 
-		markers="markersProperty"
-		latitude="clickedLatitudeProperty"
-		longitude="clickedLongitudeProperty"
-		mark-click="true"
-		draggable="true"
-		style="height: 1000px; width: 100%">
-	</div> 	 -->
-<!-- <google-map center="center" draggable="true" zoom="zoom" markers="markers" mark-click="true" style="height: 400px"></google-map>	 -->
-<!-- <google-map center="center" zoom="zoom" markers="markers" refresh="!isMapElementHidden" style="height: 400px"></google-map> -->
+<div class="row-fluid">
+  <div class="span3">
 
-<!-- <div ng-app="WalkaboutSG" ng-controller="MapCtrl">
-  <div class="tabs">
-    <div ng-click="selected = 'first'" ng-class="{'selected': selected == 'first'}" class="tab">first</div>
-  	<div ng-click="selected = 'second'" ng-class="{'selected': selected == 'second'}" class="tab">second</div>
-   </div>
-   
-    <div ng-show="selected == 'first'" class="tab_content">      
-        <map id="map_canvas"></map>
-    </div>
-    <div ng-show="selected == 'second'" class="tab_content">
-    	
-    </div>
-</div> -->
+    <div ui-map-info-window="myInfoWindow">  
+      <label >Suggested Routes</label>
+        <select ng-model='WalkaboutSG.route'  
+                ng-options='option.value as option.name for option in walkaboutNeighborhoods'>
+          <option value="{{option.value}}">{{option.name}}</option>
+          <option value="">-- Select route --</option>
+        </select>
+      <br/>
+      <br/>                                        
+    </div>  
+      
+    <label>Neighboorhoods</label>
+    <ul class="nav nav-pills nav-stacked">
+      <li class="accordion-group"  ng-repeat="neighboorhood in walkaboutNeighborhoods" ui-animate>
+          <a ng-click="panTo(incidence)">
+              <span class="badge badge-warning">{{$index+1}}</span> {{neighboorhood.name}}
+          </a>
+      </li>
+    </ul>
 
-<!-- <div ng-app='WalkaboutSG'>
-    <div ng-controller="MapCtrl">
-        <div id="map_canvas" ui-map="myMap" 
-       style="height:300px;width:400px;border:2px solid #777777;margin:3px; border:1px solid" 
-       ui-options="mapOptions" 
-       ui-event="{'map-idle' : 'onMapIdle()'}"
-       >
-        </div>
-        
-        <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
-                       ui-event="{'map-click': 'markerClicked(marker)'}">
-        </div>
-    </div>
-</div> -->
+  </div>
 
-      <div class="google-map" 
+  <div class="span9 well">
+    <div class="google-map" 
       center="centerProperty"
       zoom="zoomProperty" 
-      markers="markersProperty"
       latitude="clickedLatitudeProperty"
       longitude="clickedLongitudeProperty"
       mark-click="true"
       draggable="true"
-      style="height: 1000px; width: 100%">
-    </div>
+      style="height: 400px; width: 100%"
+      id="map_canvas" 
+      ui-map="myMap" 
+          style="height:300px;width:400px;border:2px solid #777777;margin:3px; border:1px solid"        
+      ui-options="mapOptions" 
+          ui-event="{'map-idle' : 'onMapIdle()'}"
+      >
+    </div>          
+  </div>
+</div>
+
+
+<style>
+    .map {
+        height: 400px;
+        width: 100%;
+    }
+    
+    li.accordion-group {
+        transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        overflow: hidden;
+    }
+    /* The 'hidden' state to transition from & to */
+    li.ui-animate {
+        opacity: 0;
+        max-height: 0;
+        padding: 0 5px;
+    }
+</style>

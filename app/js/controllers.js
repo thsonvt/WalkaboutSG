@@ -31,6 +31,16 @@ function MapCtrl($scope) {
 				latitude: 1.293509,
 				longitude: 103.85229
 			}],
+
+        walkaboutNeighborhoods : [
+            { name: 'Clementi', value: 'Clementi' }, 
+            { name: 'Tanjong Pagar', value: 'Tanjong Pagar' }, 
+            { name: 'Raffles Place', value: 'Raffles Place' },
+            { name: 'Clarke Quay', value: 'Clarke Quay' },
+            { name: 'China Town', value: 'China Town' },
+            { name: 'Orchard', value: 'Orchard' },
+            { name: 'Bugis', value: 'Bugis' }
+        ],			
 		
 		// These 2 properties will be set when clicking on the map
 		clickedLatitudeProperty: null,	
