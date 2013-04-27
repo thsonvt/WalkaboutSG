@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" ng-app="angular-google-maps-example">
+<head>
+  <meta charset="utf-8">
+  <title>WalkaboutSG</title>
+  
+  <!-- In production use:  
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>  
+
+  <script src="lib/angular/angular.js"></script>
+  
+  <link rel="stylesheet" href="css/app.css"/>  
+  <script src="js/app.js"></script>
+  -->
+
+  <!--
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAkKTv-cjbfSoo7ktc3ylVQtx44I8iOIwA&sensor=false&language=en"></script>  
+  <script src="lib/angular-google-maps/angular-google-maps.js"></script>  
+
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>     
+  <script src="lib/angular-ui/angular-ui.js"></script>   
+  <script src="lib/angular-ui/common/module.js"></script>   
+  <link rel="stylesheet" href="lib/angular-ui/angular-ui.css"/>
+-->  
+
+  <!-- google maps -->
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+  <script src="angular-google-maps.js"></script>
+
+  <!-- angular -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
+  <!--
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+-->
+  <!-- angular UI -->
+
+  <!-- angular UI Bootstrap -->
+    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>    
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+  <!-- app specific JS -->
+  <!--
+    <script src="example.js"></script>
+   -->      
+  <script src="example-controller.js"></script>    
+
+</head>
+<body ng-controller="ExampleController">
+<!--   <ul class="menu">
+    <li><a href="#/view1">view1</a></li>
+    <li><a href="#/view2">view2</a></li>
+    <li><a href="#/map">map</a></li>
+  </ul>
+
+  <div ng-view></div>
+
+  <div>Angular seed app: v<span app-version></span></div> -->
+
+    <div class="google-map" 
+    center="centerProperty"
+    zoom="zoomProperty" 
+    markers="markersProperty"
+    latitude="clickedLatitudeProperty"
+    longitude="clickedLongitudeProperty"
+    mark-click="true"
+    draggable="true"
+    style="height: 1000px; width: 100%">
+  </div>
+
+
+
+
+
+  
+</body>
+</html>
