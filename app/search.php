@@ -24,13 +24,18 @@ function getConnection() {
 }
 
 function getWalkabouts() {
-    $sql = "select * FROM walkaboutsg ORDER BY title";
+    $sql = "select lat, lng FROM walkaboutsg";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);  
         $walkabouts = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         echo json_encode($walkabouts);
+
+        // echo $walkabouts;
+        // echo json_decode($walkabouts);
+        // echo json_decode(json_encode($walkabouts));
+
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}'; 
     }
@@ -38,6 +43,7 @@ function getWalkabouts() {
 
 // $data = getWalkabouts();
 // echo json_encode($data);
+// echo json_decode(getWalkabouts());
 echo getWalkabouts();
 
 // // $data = file_get_contents("php://input");
