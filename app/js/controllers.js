@@ -1,11 +1,20 @@
 'use strict';
 
 /* Controllers */
-
+/*
+By convention, controller names should start with a capital letter and end with "Ctrl".
+angular.module('yourAppDep').controller('MyCtrl', function () {
+  // ...
+});
+Remember that controllers can be reused. This seems obvious, but I've caught myself reimplementing features 
+in different controllers. For example, consider a user control panel that allows a user to change application 
+settings and a dialog box prompting a user to change a setting. Both could share a common controller
+*/
 
 (function () {
-	var module = angular.module("WalkaboutSG.controllers", ["google-maps"]);
+	var module = angular.module("WalkaboutSG.controllers", ["google-maps", "ngResource"]);
 }());
+
 
 function MyCtrl1() {
 
@@ -13,20 +22,20 @@ function MyCtrl1() {
 function MyCtrl2() {
 
 }	
-function MapCtrl($scope) {
-	
+
+function MapCtrl($scope, UserService) {
 	angular.extend($scope, {
 		
-		/** the initial center of the map */
+		// the initial center of the map 
 		centerProperty: {
 			lat: 1.293509,
 			lng: 103.85229
 		},
 		
-		/** the initial zoom level of the map */
+		// the initial zoom level of the map
 		zoomProperty: 14,
 		
-		/** list of markers to put in the map */
+		// list of markers to put in the map
 		markersProperty: [ {
 				latitude: 1.293509,
 				longitude: 103.85229
@@ -45,5 +54,45 @@ function MapCtrl($scope) {
 		// These 2 properties will be set when clicking on the map
 		clickedLatitudeProperty: null,	
 		clickedLongitudeProperty: null,
-	});
+	});        
 }
+
+// function MapCtrl($scope, UserService) {
+//     var ll = new google.maps.LatLng(1.293509, 103.85229);
+//     $scope.mapOptions = {
+//         center: ll,
+//         zoom: 15,
+//         mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
+
+// 	$scope.walkaboutNeighborhoods = [
+//             { name: 'Clementi', value: 'Clementi' }, 
+//             { name: 'Tanjong Pagar', value: 'Tanjong Pagar' }, 
+//             { name: 'Raffles Place', value: 'Raffles Place' },
+//             { name: 'Clarke Quay', value: 'Clarke Quay' },
+//             { name: 'China Town', value: 'China Town' },
+//             { name: 'Orchard', value: 'Orchard' },
+//             { name: 'Bugis', value: 'Bugis' }
+//     ];
+
+//     //Markers should be added after map is loaded
+//     $scope.onMapIdle = function() {
+//         var marker = new google.maps.Marker({
+//             map: $scope.myMap,
+//             position: ll
+//         });
+//         $scope.myMarkers = [marker, ];
+//     };
+
+//     $scope.markerClicked = function(m) {
+//         window.alert("clicked");
+//     };
+// }​
+
+function WalkaboutListCtrl($scope,$http, UserService) {
+    $http.get('search.php').success(function(data) {
+        $scope.walkabouts = data;
+    });
+}
+
+

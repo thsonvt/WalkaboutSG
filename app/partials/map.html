@@ -21,9 +21,17 @@
       </li>
     </ul>
 
+    <label>Walkabouts</label>
+    <ul ng:controller="WalkaboutListCtrl">
+            <li ng:repeat="walkabout in walkabouts">
+                {{walkabout.title}}
+            </li>
+     </ul>    
+   
+
   </div>
 
-  <div class="span9 well">
+  <div class="span9 well" ng:controller="MapCtrl">
     <div class="google-map" 
       center="centerProperty"
       zoom="zoomProperty" 
@@ -38,7 +46,19 @@
       ui-options="mapOptions" 
           ui-event="{'map-idle' : 'onMapIdle()'}"
       >
-    </div>          
+    </div>     
+<!--       <div id="map_canvas" ui-map="myMap" 
+       style="height:300px;width:400px;border:2px solid #777777;margin:3px; border:1px solid" 
+       ui-options="mapOptions" 
+       ui-event="{'map-idle' : 'onMapIdle()'}"
+       >
+        </div> -->
+        
+        <!--In addition to creating the markers on the map, div elements with existing google.maps.Marker object should be created to hook up with events -->
+<!--         <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+                       ui-event="{'map-click': 'markerClicked(marker)'}">
+        </div> -->
+
   </div>
 </div>
 
