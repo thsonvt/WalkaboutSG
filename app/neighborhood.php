@@ -1,5 +1,18 @@
 <?php
 
+// The request is a JSON request.
+// We must read the input.
+// $_POST or $_GET will not work!
+
+
+// require 'Slim/Slim.php';
+
+// $app = new Slim();
+
+// $app->get('/walkabouts', 'getWalkabouts');
+
+// $app->run();
+
 function getConnection() {
 	$dbhost="localhost";
 	$dbuser="repre_admin";
@@ -10,19 +23,20 @@ function getConnection() {
 	return $dbh;
 }
 
-function getWalkabouts() {
-    $sql = "select * FROM `walkaboutsg` order by title";
+function getNeighborhoods() {
+    $sql = "select * FROM `walkabout_neighborhood` order by id";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);  
-        $walkabouts = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $neighborhoods = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo json_encode($walkabouts);
+        echo json_encode($neighborhoods);
 
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}'; 
     }
 }
-echo getWalkabouts();
+
+echo getNeighborhoods();
 
 ?>

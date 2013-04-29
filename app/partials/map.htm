@@ -1,0 +1,90 @@
+<div class="row-fluid">
+  <div class="span3">
+
+    <div ui-map-info-window="myInfoWindow">  
+      <label >Suggested Routes</label>
+        <select ng-model='WalkaboutSG.route'  
+                ng-options='option.value as option.name for option in walkaboutNeighborhoods'>
+          <option value="{{option.value}}">{{option.name}}</option>
+          <option value="">-- Select route --</option>
+        </select>
+      <br/>
+      <br/>                                        
+    </div>  
+      
+    <label>Neighboorhoods</label>
+    <ul class="nav nav-pills nav-stacked">
+      <li class="accordion-group"  ng-repeat="neighboorhood in walkaboutNeighborhoods" ui-animate>
+          <a ng-click="panTo(incidence)">
+              <span class="badge badge-warning">{{$index+1}}</span> {{neighboorhood.name}}
+          </a>
+      </li>
+    </ul>
+
+
+  </div>
+
+  <div class="span9 well" ng:controller="MapCtrl">
+
+<!--     <div id="map_canvas" ui-map="myMap" class="map"
+      ui-event="{'map-click': 'addMarker($event)', 'map-zoom_changed': 'setZoomMessage(myMap.getZoom())' }"
+      ui-options="mapOptions">
+    </div> -->
+
+    <!-- <div class="google-map"  -->
+
+      <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+        ui-event="{'map-click': 'openMarkerInfo(marker)'}">
+      </div>
+
+    <div ui-map-info-window="myInfoWindow">
+      <h1>Marker</h1>
+      Lat: <input ng-model="currentMarkerLat">, Lng: <input ng-model="currentMarkerLng">
+      <a ng-click="setMarkerPosition(currentMarker, currentMarkerLat, currentMarkerLng)">Set Position</a>
+    </div>
+
+    <div class="google-map"
+      ui-map="myMap" 
+      id="map_canvas" 
+      ui-event="{'map-idle' : 'onMapIdle()', 'map-click': 'addMarker($event)"
+      center="centerProperty"
+      zoom="zoomProperty" 
+      latitude="clickedLatitudeProperty"
+      longitude="clickedLongitudeProperty"
+      mark-click="true"
+      draggable="true"
+      style="height: 400px; width: 100%"            
+      style="height:300px;width:400px;border:2px solid #777777;margin:3px; border:1px solid"        
+      ui-options="mapOptions" 
+      markers="markersProperty">
+    </div>     
+        
+        <!--In addition to creating the markers on the map, div elements with existing google.maps.Marker object should be created to hook up with events -->
+<!--         <div ng-repeat="marker in markersProperty" ui-map-marker="markersProperty[$index]"
+                       ui-event="{'map-click': 'markerClicked(marker)'}">
+        </div> -->
+
+  </div>
+</div>
+
+
+<style>
+    .map {
+        height: 400px;
+        width: 100%;
+    }
+    
+    li.accordion-group {
+        transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        overflow: hidden;
+    }
+    /* The 'hidden' state to transition from & to */
+    li.ui-animate {
+        opacity: 0;
+        max-height: 0;
+        padding: 0 5px;
+    }
+</style>

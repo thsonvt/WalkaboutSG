@@ -1,0 +1,77 @@
+
+
+<div ng-app='maptesting'>
+    <div ng-controller="MapCtrl">
+
+        <div class="row-fluid">
+            <div class="span3">
+
+              <label >Suggested Routes</label>
+                <select ng-model='WalkaboutSG.route'  
+                        ng-options='option.value as option.name for option in walkaboutNeighborhoods'>
+                  <option value="{{option.value}}">{{option.name}}</option>
+                  <option value="">-- Select route --</option>
+                </select>
+              <br/>
+              <br/>                                        
+                  
+                <label>Neighboorhoods</label>
+                <ul class="nav nav-pills nav-stacked">
+                  <li class="accordion-group"  ng-repeat="neighboorhood in walkaboutNeighborhoods" ui-animate>
+                      <a ng-click="panTo(incidence)">
+                          <span class="badge badge-warning">{{$index+1}}</span> {{neighboorhood.name}}
+                      </a>
+                  </li>
+                </ul>        
+
+                <div class="span9 well">
+
+                    <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+                    ui-event="{'map-click': 'openMarkerInfo(marker)'}">
+                    </div>    
+
+                    <div ui-map-info-window="myInfoWindow">
+                              <div class='marker_title'>Title</div>
+                              <div class='marker_uri'><a target='_blank' href='#'>http://represent.sg</a></div>
+                              <div class='marker_desc'>Desc</div>
+                              <div class='marker_address'>Address</div>
+                    </div>
+
+                    <div class="google-maps" id="map_canvas" ui-map="myMap" 
+                    style="height:300px;width:100%;border:2px solid #777777;margin:3px; border:1px solid" 
+                    ui-options="mapOptions" 
+                    ui-event="{'map-idle' : 'onMapIdle()'}"
+                    >
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+
+    </div>
+</div>    
+
+
+
+
+<style>
+    .map {
+        height: 400px;
+        width: 100%;
+    }
+    
+    li.accordion-group {
+        transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        overflow: hidden;
+    }
+    /* The 'hidden' state to transition from & to */
+    li.ui-animate {
+        opacity: 0;
+        max-height: 0;
+        padding: 0 5px;
+    }
+</style>
