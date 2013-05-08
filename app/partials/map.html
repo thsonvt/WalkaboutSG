@@ -33,29 +33,23 @@
             </div>
 
               <div ui-map-info-window="myInfoWindow">
-                <div class='marker_title'>{{company.title}}</div>
-                <div class='marker_uri'><a target='{{company.url}}' href='{{company.url}}'>{{company.url}}</a></div>
-                <div class='marker_desc'>{{company.desc}}</div>
-                <div class='marker_address'>{{company.address}}</div>
-              </div>
+                <b>Company Name:</b>  {{company.title}}<br><br>
+                
+                <b>Website:</b>  <a target='{{company.url}}' href='{{company.url}}'>{{company.url}}</a><br><br>
 
+                <b>About:</b>  {{company.desc}}<br><br>
+                
+                <b>Address:</b>  {{company.address}}<br><br>
+                
+                <p ng-show="{{company.special_note.length > 0}}"><b>Special Note:</b> {{company.special_note}}</span>            
+                
+                <!-- <div ui-if="{{company.special_note.length() > 0}}">  {{company.special_note}}</div> --><br>
+                
+                <p ng-show="{{company.hiring_note.length > 0}}"><b>Hiring Note:</b> {{company.hiring_note}}</span>  
 
-
-      <!--     <div class="google-map"
-            ui-map="myMap" 
-            id="map_canvas" 
-            ui-event="{'map-idle' : 'onMapIdle()', 'map-click': 'addMarker($event)"
-            center="centerProperty"
-            zoom="zoomProperty" 
-            latitude="clickedLatitudeProperty"
-            longitude="clickedLongitudeProperty"
-            mark-click="true"
-            draggable="true"
-            style="height: 400px; width: 100%"            
-            style="height:300px;width:400px;border:2px solid #777777;margin:3px; border:1px solid"        
-            ui-options="mapOptions" 
-            markers="markersProperty">
-          </div>  -->    
+                <!-- <div ui-if="{{company.hiring_note.length() > 0}}">  {{company.hiring_note}}</div><br> -->
+                <b>Open Hours:</b>  {{company.open_hours}}<br>
+              </div>  
 
             <div  class="google-maps" id="map_canvas" ui-map="myMap" 
                   style="height:400px;width:100%;border:2px solid #777777;margin:3px; border:1px solid" 

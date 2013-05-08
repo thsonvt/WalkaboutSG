@@ -24,102 +24,9 @@ function MyCtrl2() {
 }	
 
 
-// function MapCtrl($scope, $http, UserService) {	
-
-// 	    var ll = new google.maps.LatLng(1.293509, 103.85229);
-
-// 	    $scope.myMarkers = [];		
-
-// 		$scope.centerProperty = {
-// 			lat: 1.293509,
-// 			lng: 103.85229
-// 		};
-		
-// 		// the initial zoom level of the map
-// 		$scope.zoomProperty= 14;		
-
-// 		$http.get('search.php').success(function(data) {
-// 	        var geoArr = [];
-// 	        var markerArr = [];
-
-// 	        for (var i = 0; i < data.length; i++) {
-// 			    var object = data[i];
-// 			    geoArr.push({latitude: object['lat'], longitude: object['lng']});
-// 			}
-// 			$scope.markersProperty = geoArr;
-// 		 });			
-
-//         $scope.walkaboutNeighborhoods = [
-//             { name: 'Clementi', value: 'Clementi' }, 
-//             { name: 'Tanjong Pagar', value: 'Tanjong Pagar' }, 
-//             { name: 'Raffles Place', value: 'Raffles Place' },
-//             { name: 'Clarke Quay', value: 'Clarke Quay' },
-//             { name: 'China Town', value: 'China Town' },
-//             { name: 'Orchard', value: 'Orchard' },
-//             { name: 'Bugis', value: 'Bugis' }
-//         ];		
-		
-// 		// These 2 properties will be set when clicking on the map
-// 		$scope.clickedLatitudeProperty= null;
-// 		$scope.clickedLongitudeProperty= null;    
-
-// 	    //Markers should be added after map is loaded
-// 	    $scope.onMapIdle = function() {
-// 	        var marker = new google.maps.Marker({
-// 	            map: $scope.myMap,
-// 	            position: ll
-// 	        });
-// 	        $scope.myMarkers = [marker, ];
-// 	    };
-
-// 	    $scope.markerClicked = function(m) {
-// 	        window.alert("clicked");
-// 	    };		 
-
-// 		$scope.addMarker = function($event) {
-// 		  $scope.myMarkers.push(new google.maps.Marker({
-// 		    map: $scope.myMap,
-// 		    position: $event.latLng
-// 		  }));
-// 		};
-		 
-// 		$scope.setZoomMessage = function(zoom) {
-// 		  $scope.zoomMessage = 'You just zoomed to '+zoom+'!';
-// 		  console.log(zoom,'zoomed')
-// 		};	    
-
-// 		$scope.openMarkerInfo = function(marker) {
-// 		  $scope.currentMarker = marker;
-// 		  $scope.currentMarkerLat = marker.getPosition().lat();
-// 		  $scope.currentMarkerLng = marker.getPosition().lng();
-// 		  $scope.myInfoWindow.open($scope.myMap, marker);
-// 		};
-		 
-// 		$scope.setMarkerPosition = function(marker, lat, lng) {
-// 		  marker.setPosition(new google.maps.LatLng(lat, lng));
-// 		};	    
-// }
-
 angular.module('maptesting', ['ui']);
 
-
-
-// function handleNoGeolocation(errorFlag) {
-//   if (errorFlag) {
-//     var content = 'Error: The Geolocation service failed.';
-//   } else {
-//     var content = 'Error: Your browser doesn\'t support geolocation.';
-//   }
-
-//   var options = {
-//     map: map,
-//     position: new google.maps.LatLng(60, 105),
-//     content: content
-//   };
-
-//   var infowindow = new google.maps.InfoWindow(options);
-//   map.setCenter(options.position);
-// }
+var image = 'http://i.stack.imgur.com/orZ4x.png';
 
 function MapCtrl($scope, $http, UserService) {
     var ll = new google.maps.LatLng(1.293509, 103.85229);
@@ -173,7 +80,9 @@ function MapCtrl($scope, $http, UserService) {
             
             var geo = new google.maps.LatLng(object['lat'], object['lng']);
             
-            var company = {title: object['title'], desc: object['description'], url: object['uri'], address: object['address'], neighborhoodId: object['neighborhoodId']};
+            var company = {title: object['title'], desc: object['description'], 
+            url: object['uri'], address: object['address'], special_note: object['special_note'],
+            hiring_note: object['hiring_note'], open_hours: object['open_hours'], logo: object['logo']};
 
             var marker = new google.maps.Marker({
                                 map: $scope.myMap,
@@ -225,7 +134,7 @@ function MapCtrl($scope, $http, UserService) {
             var pos = new google.maps.LatLng(position.coords.latitude,
                                              position.coords.longitude);
 
-          var image = 'http://i.stack.imgur.com/orZ4x.png';
+          
           // http://www.robotwoods.com/dev/misc/bluecircle.png
           // var marker = new google.maps.Marker({
           //         position: pos,
@@ -257,10 +166,13 @@ function MapCtrl($scope, $http, UserService) {
     };   
 
     $scope.panTo = function(neighborhood) {
+
+        // var image = 'http://i.stack.imgur.com/orZ4x.png';
         var marker = new google.maps.Marker({
                 position: neighborhood.location,
                 map: $scope.myMap,
-                title: neighborhood.name
+                title: neighborhood.name,
+                icon: image
             });  
       // var markers = $scope.myMarkers;
       // var markerArr = [];
@@ -270,7 +182,8 @@ function MapCtrl($scope, $http, UserService) {
       //     markerArr.push(markers[i]);
       //   }
       // }
-
+      $scope.myMap.setZoom(16);
+      $scope.zoomProperty=16;
       $scope.myMap.setCenter(neighborhood.location);
     };        
 
